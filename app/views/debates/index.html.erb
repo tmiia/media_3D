@@ -1,0 +1,23 @@
+<main class="article__index">
+  <h1>Tous les débats</h1>
+
+  <section class="search">
+    <div class="input-search">
+      <%= search_form_for @q do |f| %>
+        <%= f.search_field :title_cont %>
+
+        <%= f.submit "Search" %>
+      <% end %>
+    </div>
+
+    <div class="search-filters">
+      <% @categories.each do |cat| %>
+        <span class="category category-<%= cat.id %>"><%= link_to cat.label, "/articles?q%5Bcategory_label_cont%5D=#{cat.label}&commit=search" %></span>
+      <% end %>
+    </div>
+    <div class="search-sort">
+      <%= sort_link(@q, :is_longformat, "Long format") %> |
+      <%= sort_link(@q, :created_at, "Date de parution") %>
+    </div>
+  </section>
+</main>

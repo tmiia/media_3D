@@ -1,0 +1,29 @@
+<header id="document-header">
+  <div class="container">
+    <a href="/" class="logo">
+      <%= image_tag ("logo-black.svg")%>
+      <span>Accueil</span>
+    </a>
+    <% if current_admin %>
+      <a href="/admin">Dashboard</a>
+    <% end %>
+    <% if current_user %>
+      <span class="streak">
+        <%= image_tag("flame.png") %>
+        <%= consecutive_days_of_reading(current_user) %>
+      </span>
+      <%= link_to "users/#{current_user.id}", class: "user" do %>
+        <img src="<%= current_user.avatar %>" class="avatar">
+      <% end %>
+    <% else %>
+    <ul>
+      <li>
+        <%= link_to "Inscription", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "Connexion", new_user_session_path %>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+</header>

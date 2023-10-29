@@ -1,0 +1,38 @@
+#cookies-bar {
+    display: none;
+    position: fixed;
+    bottom: px2rem(90);
+    background-color: $body-background-color;
+    z-index: 20;
+    max-width: 400px;
+    border-radius: $border-radius;
+    padding: $spacing2;
+    span{
+        font-size: 10px;
+    }
+    p {
+      a{
+        color: $color-text-alt;
+      }
+      & + p {
+        margin-top: $spacing1;
+      }
+    }
+    .cookies-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: $spacing2;
+      button{
+        padding: $spacing1 $spacing5;
+      }
+      a:first-child {
+        @include cta($body-color, $body-background-color);
+      }
+      a:last-child {
+        @include cta($body-background-color, $body-color);
+        box-shadow: $box-shadow;
+      }
+    }
+
+
+}

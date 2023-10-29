@@ -1,0 +1,55 @@
+
+.comment-new form {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: $spacing1;
+  justify-content: space-between;
+  gap: $spacing2;
+  display: flex;
+  .field {
+    flex: 1;
+  }
+  textarea {
+      border: none;
+      font-family: $body-font-family;
+      width: 100%;
+  }
+  input[type="submit"] {
+      @include reset-btn;
+      @include cta;
+
+  }
+}
+.comments-list,
+.debate-content {
+  margin-bottom: $spacing5;
+}
+.comment {
+  border-bottom: 1px solid #eee;
+  padding-bottom: $spacing4;
+  .comment-heading {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: $spacing2;
+    gap: $spacing1;
+    a {
+      @include stretched-link;
+    }
+    .avatar {
+      border-radius: 100%;
+      height: 50px;
+      width: 50px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  & + .comment {
+    margin-top: $spacing5;
+  }
+
+}

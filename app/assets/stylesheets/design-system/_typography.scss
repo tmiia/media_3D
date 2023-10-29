@@ -1,0 +1,50 @@
+// p, h1, h2, h3, h4, h5, h6, li, a, th, td, span {
+//     text-edge: cap alphabetic;
+//     text-box-edge: cap alphabetic;
+//     leading-trim: both;
+//     text-box-trim: both;
+// }
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h2, h3 {
+    margin-bottom: $spacing5;
+}
+a {
+  text-decoration: none;
+}
+
+section > .container > h2,
+section > .container > h3 {
+    margin-bottom: $spacing5;
+}
+
+h1, .h1 {
+    font-family: $h1-font-family;
+    font-size: $h1-font-size;
+    font-weight: $h1-font-weight;
+}
+h2, .h2 {
+    font-family: $h2-font-family;
+    font-size: $h2-font-size;
+    font-weight: $h2-font-weight;
+}
+h3, .h3 {
+    font-family: $h3-font-family;
+    font-size: $h3-font-size;
+    font-weight: $h3-font-weight;
+}
+.lead {
+    font-family: $lead-font-family;
+    font-size: $lead-font-size;
+    font-style: $lead-font-style;
+    font-weight: $lead-font-weight;
+}
+.meta {
+    color: $meta-text-color;
+    font-family: $meta-font-family;
+    font-size: $meta-font-size;
+}

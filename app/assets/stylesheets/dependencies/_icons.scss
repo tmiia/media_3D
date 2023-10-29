@@ -1,0 +1,37 @@
+$icon_root_path: "./icons";
+$icons: 'share', 'clock', 'close', 'debat', 'home', 'insta', 'menu', 'send', 'snapchat', 'tiktok', 'twitch', 'chevron-right', 'arrow-right', 'favorite', 'logout';
+$icon_prefix: "f";
+
+span {
+    &.#{$icon_prefix} {
+        @each $icon in $icons {
+            &-#{$icon} {
+                @include getIcons("#{$icon_root_path}/solid/#{$icon}.svg", $body-color);
+
+                &-o {
+                    @include getIcons("#{$icon_root_path}/outline/#{$icon}.svg", $body-color);
+                  }
+
+                  &-sm {
+                    @include getIcons("#{$icon_root_path}/solid/#{$icon}.svg", $body-color, 16px);
+                }
+
+            }
+
+        }
+
+    }
+
+    &.favorite {
+        background-color: $body-color;
+
+    }
+
+    &[class^="f"] {
+        &.xs {
+            width: 12px;
+            height: 12px;
+            background-size: 12px;
+        }
+    }
+}

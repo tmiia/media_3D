@@ -1,0 +1,11 @@
+<div id="cookies-bar" class="cookies-bar">
+  <div class="container">
+    <h2>🍪 Fournée de cookies bien chauds ! <span>miam</span></h2>
+    <p>Nous ne récoltons pas de donnée personnelle, juste le strict nécessaire pour t’offrir une expérience optimale !</p>
+    <p class="CGU">Voir les <%= link_to "Conditions Générales d’Utilisation", "legal/cgu" %> </p>
+    <div class="cookies-actions">
+      <%= link_to 'Accept', request.original_url, class: 'btn accept' %>
+      <%= link_to 'Reject', request.original_url, class: 'btn reject' %>
+    </div>
+  </div>
+</div>

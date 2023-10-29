@@ -1,0 +1,78 @@
+<main class="home">
+  <section class="">
+    <div class="container">
+      <h2>La vulgarisation du jour</h2>
+      <% if @long_format_day.present? %>
+        <article class="article longformat">
+          <div class="article-content">
+            <div class="heading">
+              <hgroup>
+                <h3><%= link_to @long_format_day.title, @long_format_day %></h3>
+                <span>En 360</span>
+              </hgroup>
+              <div class="categories">
+                <div class="category category-<%= @long_format_day.category_id %>">
+                  <%= link_to category_name_from_id(@long_format_day.category_id), category_url_from_id(@long_format_day.category_id) %>
+                </div>
+                <span class="mood mood-<%= @long_format_day.mood_value %>" title="Article de niveau <%= @long_format_day.mood_value %> sur 10"></span>
+                <div class="favorite">
+                  <% if user_signed_in? && current_user.favorites.exists?(article: @long_format_day) %>
+                    <span class="f-favorite"></span>
+                  <% else %>
+                    <span class="f-favorite-o"></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <p class="lead"><%= @long_format_day.lead %></p>
+          </div>
+          <div class="media">
+            <img src="<%= @long_format_day.thumbnail %>">
+          </div>
+        </article>
+      <% else %>
+        <span>Pas de vulgarisation publié aujourd'hui</span>
+      <% end %>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>La dose d'actus du jour</h2>
+      <div class="articles">
+        <% if @actus_day.any? %>
+          <% @actus_day.each do |actus| %>
+                <article class="article">
+                  <div class="article-content">
+                    <hgroup>
+                      <h3><%= link_to actus.title, actus %></h3>
+                      <p><%= actus.lead.truncate(80) %></p>
+                      <p class="more">Consulter l'article <span class="f-chevron-right"></span></p>
+                    </hgroup>
+                    <div class="article-meta">
+                      <span class="category category-<%= actus.category_id %>">
+                        <%= category_name_from_id(actus.category_id) %>
+                      </span>
+                      <span class="mood mood-<%= actus.mood_value %>" title="Article de niveau <%= actus.mood_value %> sur 10"></span>
+                      <div class="favorite">
+                        <% if user_signed_in? && current_user.favorites.exists?(article: actus) %>
+                          <span class="f-favorite"></span>
+                        <% else %>
+                          <span class="f-favorite-o"></span>
+                        <% end %>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="media">
+                    <img src="<%= actus.thumbnail %>">
+                  </div>
+                </article>
+          <% end %>
+        <% else %>
+          <span>Pas d'actu' publiée aujourd'hui.</span>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+</main>

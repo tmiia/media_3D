@@ -1,0 +1,120 @@
+
+<main class="debate__page">
+  <header class="hero">
+    <div class="container">
+      <hgroup>
+        <h1><%= @debate.title %></h1>
+        <span class="meta">Le débat du jour</span>
+      </hgroup>
+      <div class="actions">
+        <div class="categories">
+          <span class="category">Culture</span>
+          <span class="mood"></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <% if user_signed_in? %>
+    <section class="debate-poll">
+      <div class="container">
+        <h2>Le débat du jour</h2>
+        <hgroup>
+          <h3><%= @poll.question %></h3>
+          <span><%= @poll.total_votes %> votes</span>
+        </hgroup>
+        <div class="actions">
+          <button class="vote-button" data-poll-id="<%= @poll.id %>" data-option="option_1"><%= @poll.label_1 %></button>
+          <button class="vote-button" data-poll-id="<%= @poll.id %>" data-option="option_2"><%= @poll.label_2 %></button>
+          <button class="vote-button" data-poll-id="<%= @poll.id %>" data-option="option_3"><%= @poll.label_3 %></button>
+        </div>
+      </div>
+  </section>
+  <% else %>
+    <section class="poll-logout">
+      <div class="container">
+        <hgroup>
+          <h2>👋 P’tit tips !</h2>
+          <p>Connecte-toi pour participer au chat et au sondage !</p>
+        </hgroup>
+        <div class="actions">
+          <a href="#">S'inscrire</a>
+          <a href="#">Se connecter</a>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <section class="debate-content">
+    <div class="container">
+      <h2>L’heure du débat a sonné</h2>
+      <div class="comments-list">
+      <% @debate.debate_responses.each do |response| %>
+        <div class="comment">
+          <div class="comment-heading">
+            <div class="avatar">
+              <a class="user" href="<%= user_path(response.user) %>">
+                <img src="<%= response.user.avatar %>">
+              </a>
+            </div>
+            <span class="name"><b><%= response.user.pseudonym %></b></span><br>
+          </div>
+          <div class="comment-content">
+            <p><%= response.content %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+      <div class="comment-new">
+        <% if user_signed_in? %>
+          <%= form_for([@debate, @debate.debate_responses.build]) do |f| %>
+            <div class="field">
+              <%= f.text_area :content, placeholder: "Ajoute une réponse..." %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Envoyer" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>Connectez-vous pour poster un commentaire.</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<script>
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.classList.contains('vote-button')) {
+      e.preventDefault();
+      var pollId = e.target.getAttribute('data-poll-id');
+      var option = e.target.getAttribute('data-option');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/polls/' + pollId + '/vote', true);
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 400) {
+          var response = JSON.parse(xhr.responseText);
+
+          if (response.success) {
+            alert('Votre vote a été enregistré avec succès.');
+          } else {
+            alert(response.message);
+          }
+        } else {
+          console.error('Erreur lors du vote : ' + xhr.status);
+        }
+      };
+
+      xhr.onerror = function () {
+        console.error('Erreur lors du vote.');
+      };
+
+      var data = JSON.stringify({ option: option });
+      xhr.send(data);
+    }
+  });
+</script>

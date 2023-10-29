@@ -1,0 +1,31 @@
+.search {
+  margin-top: $spacing5;
+  margin-bottom: $spacing5;
+  .input-search form {
+    align-items: center;
+    gap: $spacing2;
+    display: flex;
+  }
+  input[type="search"] {
+    padding: $spacing1;
+    border: none;
+    border-bottom: 1px solid $body-color;
+    flex: 1;
+  }
+  input[type="submit"] {
+    @include cta;
+  }
+  .search-filters {
+    margin-top: $spacing5;
+  }
+  .category {
+    @include category;
+  }
+  .search-sort {
+    @extend .meta;
+    margin-top: $spacing2;
+    a {
+      @extend .meta;
+    }
+  }
+}

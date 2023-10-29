@@ -1,0 +1,94 @@
+// Colors
+$body-color: #3F3F3F;
+$body-background-color: #FDFEFE;
+$color-accent: #3F3F3F;
+$color-alt: #FDFEFE;
+$color-text-alt: transparentize($body-color, .3);
+
+$culture: #E4A7D7;
+$culture-color: #BD0095;
+$ecology: #94EC9D;
+$ecology-color: #008D16;
+$economy: #FFD749;
+$economy-color: #B27600;
+$politic: #FFB660;
+$politic-color: #994900;
+$sport: #FFA5A5;
+$sport-color: #AC0000;
+$society: #A0CFF9;
+$society-color: #0063BE;
+$science: #DBAEFF;
+$science-color: #6D00C2;
+
+$border-color: transparentize(#3F3F3F, .5);
+$box-shadow: 0px 2px 4px transparentize($body-color, .85);
+
+// Typography
+$body-font-family: 'DM Sans', Arial;
+$headings-font-family: 'Livvic';
+
+$body-font-size: px2rem(14);
+$headings-font-weight: bold;
+
+$h1-font-size: px2rem(22);
+$h1-font-family: $headings-font-family;
+$h1-font-weight: $headings-font-weight;
+
+$h2-font-size: px2rem(20);
+$h2-font-family: $body-font-family;
+$h2-font-weight: $headings-font-weight;
+
+$h3-font-size: px2rem(22);
+$h3-font-size-sm: px2rem(16);
+$h3-font-family: $headings-font-family;
+$h3-font-weight: $headings-font-weight;
+
+$lead-font-size: px2rem(14);
+$lead-font-family: $headings-font-family;
+$lead-font-weight: normal;
+$lead-font-style: italic;
+
+$meta-font-size: px2rem(15);
+$meta-text-color: $color-text-alt;
+$meta-font-family: $body-font-family;
+
+$call-to-action-size: px2rem(15);
+$call-to-action-weight: bold;
+
+$tags-font-size: px2rem(12);
+
+// Header
+$header-background-color: $body-background-color;
+$header-color: $body-color;
+
+// Articles
+$border-radius: 15px;
+$article-height: px2rem(220);
+$article-background-color: $body-background-color;
+
+// Breakpoints
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1440px);
+
+// Spacings
+$spacing0: px2rem(5);
+$spacing1: px2rem(10);
+$spacing2: px2rem(15);
+$spacing3: px2rem(20);
+$spacing4: px2rem(25);
+$spacing5: px2rem(35);
+$spacing6: px2rem(80);
+$spacing6: px2rem(100);
+
+// Grid
+$grid-gutter: px2rem(64);
+$grid-max-width: px2rem(1980);
+$grid-gutter-sm: px2rem(44);
+
+// Icons
+$icons: ();
+$icons: map-merge($icons, ("icon-debate": "\ee00"));
+$icons: map-merge($icons, ("icon-menu": "\ee01"));
+$icons: map-merge($icons, ("icon-home": "\ee02"));
+
+//Dropshadow
+$drop-shadow: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.15));

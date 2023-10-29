@@ -1,0 +1,142 @@
+#header-navigation {
+    align-items: flex-end;
+    background-color: $color-alt;
+    border-radius: 20px;
+    box-shadow: 1px 0px 3px transparentize(#000000, .85);
+    display: flex;
+    gap: $spacing3;
+    height: px2rem(60);
+    justify-content: center;
+    padding: $spacing1 $spacing5;
+    position: fixed;
+    bottom: $spacing2;
+    left: $spacing2;
+    right: $spacing2;
+    z-index: 999;
+    > * {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    button {
+      @include reset-btn;
+    }
+    a {
+      color: $body-color;
+    }
+    > a {
+      font-weight: 400;
+    }
+    .middle-btn {
+      align-items: center;
+      background-color: $color-accent;
+      border-radius: 100%;
+      border: 3px solid $body-background-color;
+      display: flex;
+      height: px2rem(45);
+      justify-content: center;
+      transform: translateY(-20%);
+      width: px2rem(45);
+      span {
+        background-color: $body-background-color;
+      }
+    }
+    .menu {
+      background-color: $body-background-color;
+      display: none;
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      &.is-opened {
+        display: block;
+      }
+      .btn__close {
+        @include reset-btn;
+        height: 40px;
+        width: 40px;
+        z-index: 9;
+      }
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        z-index: 3;
+        min-height: 100%;
+        padding-bottom: $spacing2;
+        padding-top: $spacing2;
+        img {
+          height: 50px;
+          margin-left: 50%;
+          transform: translateX(-50%);
+        }
+        button {
+          height: 40px;
+          width: 40px;
+        }
+        ul.nav li:not(.categories) {
+          display: flex;
+          position: relative;
+          align-items: center;
+          justify-content: space-between;
+          a {
+            @include stretched-link;
+          }
+          span.f-arrow-right {
+            -webkit-mask-position: center;
+          }
+        }
+        .nav-top > ul:first-of-type {
+          display: flex;
+          flex-direction: column;
+          gap: $spacing3;
+          li {
+              a {
+              @extend .h2;
+              color: $body-color;
+            }
+          }
+        }
+        li.categories {
+          ul {
+            border-bottom: 1px solid $body-color;
+            display: flex;
+            flex-wrap: wrap;
+            gap: $spacing2;
+            margin-top: $spacing4;
+            padding-bottom: $spacing3;
+            li {
+              margin-bottom: 0 !important;
+            }
+          }
+          span {
+            @extend .h2;
+            display: block;
+          }
+          .category {
+            @include category;
+          }
+        }
+        ul.socials,
+        ul.legals {
+          display: flex;
+          gap: $spacing4;
+          justify-content: center;
+          margin-top: $spacing5;
+          margin-bottom: 0;
+        }
+        ul.legals {
+          justify-content: space-between;
+        }
+      }
+      button {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+
+}

@@ -1,0 +1,48 @@
+<% if article.is_longformat%>
+  <article class="article longformat">
+    <div class="article-content">
+      <div class="heading">
+        <hgroup>
+          <h3><%= link_to article.title, article %></h3>
+          <span>En 360</span>
+        </hgroup>
+        <div class="categories">
+          <div class="category category-<%= article.category_id %>">
+            <%= link_to category_name_from_id(article.category_id), category_url_from_id(article.category_id) %>
+          </div>
+          <span class="mood mood-<%= article.mood_value %>" title="Article de niveau <%= article.mood_value %> sur 10"></span>
+        </div>
+      </div>
+      <p class="lead"><%= article.lead %></p>
+    </div>
+    <div class="media">
+      <img src="<%= article.thumbnail %>">
+    </div>
+  </article>
+<% else %>
+  <article class="article">
+    <div class="article-content">
+      <hgroup>
+        <h3><%= link_to article.title, article %></h3>
+        <p><%= article.lead.truncate(80) %></p>
+        <p class="more">Consulter l'article<span class="f-chevron-right"></span></p>
+      </hgroup>
+      <div class="article-meta">
+        <span class="category category-<%= article.category_id %>">
+          <%= category_name_from_id(article.category_id) %>
+        </span>
+        <span class="mood mood-<%= article.mood_value %>" title="Article de niveau <%= article.mood_value %> sur 10"></span>
+        <div class="favorite">
+          <% if user_signed_in? && current_user.favorites.exists?(article: article) %>
+            <span class="f-favorite"></span>
+          <% else %>
+            <span class="f-favorite-o"></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="media">
+      <img src="<%= article.thumbnail %>">
+    </div>
+  </article>
+<% end %>

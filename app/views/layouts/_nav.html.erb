@@ -1,0 +1,51 @@
+<nav id="header-navigation">
+  <%= link_to root_path do %>
+    <span class="f-home"></span>
+    <span>Accueil</span>
+  <% end %>
+  <%= link_to debate_of_the_day_path do %>
+    <div class="middle-btn"><span class="f-debat"></span></div>
+    <span>Débat du jour</span>
+  <% end %>
+  <button class="btn__open" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu">
+    <span class="f-menu"></span>
+    <span>Menu</span>
+  </button>
+  <div class="menu">
+    <button class="btn__close" aria-label="Fermer le menu">
+      <span class="f-close"></span>
+    </button>
+    <div class="container">
+      <div class="nav-top">
+        <%= image_tag ("logo-black.svg")%>
+        <ul class="nav">
+          <li><%= link_to "Tous les “en 360“", :en_360 %><span class="f-arrow-right"></span></li>
+          <li><%= link_to "Toutes les actus", :actus %><span class="f-arrow-right"></span></li>
+          <li><%= link_to "Tous les débats", :debates %><span class="f-arrow-right"></span></li>
+          <li class="categories">
+            <span>Les catégories</span>
+            <ul>
+              <% get_categories.each do |category| %>
+                <li class="category category-<%= category.id %>"><%= category.label %></li>
+              <% end %>
+            </ul>
+          </li>
+          <li><a href="#">FAQ</a><span class="f-arrow-right"></span></li>
+        </ul>
+      </div>
+      <div class="nav-bottom">
+        <ul class="socials">
+          <li><span class="f-insta"></li>
+          <li><span class="f-tiktok"></li>
+          <li><span class="f-snapchat"></li>
+          <li><span class="f-twitch"></li>
+        </ul>
+        <ul class="legals">
+          <li><%= link_to "CGU", :legal_cgu %></li>
+          <li><%= link_to "Mentions légales", :legal %></li>
+          <li><%= link_to "RGPD", :legal_rgpd %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

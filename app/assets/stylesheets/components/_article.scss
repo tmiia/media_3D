@@ -1,0 +1,41 @@
+.article {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+    a {
+        text-decoration: none;
+    }
+    .article-content {
+        hgroup {
+            z-index: 1;
+            h3 {
+                margin-bottom: $spacing1;
+            }
+            a {
+                @include stretched-link;
+                color: $body-color;
+            }
+        }
+        .more {
+            margin-top: $spacing1;
+        }
+        .article-meta {
+            align-items: center;
+            display: flex;
+            gap: $spacing1;
+            margin-bottom: $spacing1;
+            a {
+                position: relative;
+                z-index: 3;
+            }
+            .category {
+                @include category;
+            }
+        }
+        @include media-breakpoint-down(md) {
+            padding: $spacing2;
+        }
+    }
+}

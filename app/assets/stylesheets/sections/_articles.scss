@@ -1,0 +1,273 @@
+.article__page,
+.article {
+    .category {
+        @include category;
+    }
+    .mood {
+        @include mood;
+    }
+    .more {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+}
+.article__index {
+  .article + .article {
+    margin-top: $spacing5;
+  }
+}
+.article__index,
+.home {
+  .article .favorite {
+    margin-left: auto;
+  }
+}
+.articles {
+    @include grid(2, md);
+    @include grid(3, lg);
+    .article:not(.longformat) {
+        margin-bottom: $spacing5;
+        margin-bottom: auto;
+        .article-content{
+          box-shadow: 0px 2px 4px transparentize(#000000, .95);
+          background-color: $article-background-color;
+          border-radius: $border-radius;
+          display: flex;
+          flex-direction: column-reverse;
+          height: 100%;
+          position: relative;
+          justify-content: flex-end;
+          margin-top: -$spacing3;
+          padding: $spacing3;
+        }
+        .media img {
+            aspect-ratio: 16/7;
+            object-fit: cover;
+            border-top-right-radius: $border-radius;
+            border-top-left-radius: $border-radius;
+            width: 100%;
+        }
+        @include media-breakpoint-down(md) {
+            margin-bottom: $spacing4;
+        }
+    }
+}
+
+.article__page {
+  .hero {
+    + section {
+        margin-top: $spacing5;
+    }
+    .actions {
+      align-items: center;
+      display: flex;
+      form {
+        margin-left: auto;
+        margin-right: $spacing1;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          pointer-events: none;
+        }
+      }
+      .dropdown-share {
+        position: relative;
+        .dropdown-content {
+          align-items: center;
+          background: $body-background-color;
+          border-radius: 50px;
+          box-shadow: $box-shadow;
+          height: 40px;
+          padding-top: 30px;
+          pointer-events: none;
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          transform: scaleY(0);
+          transform-origin: top;
+          transition: transform .3s ease;
+          width: 40px;
+          .share-links {
+            align-items: center;
+            display: none;
+            flex-direction: column;
+            gap: $spacing1;
+            padding-top: $spacing1;
+            li {
+              font-size: 0;
+              text-align: center;
+              img {
+                width: 26px;
+              }
+            }
+          }
+        }
+        button {
+          background: $body-background-color;
+          border: none;
+          border-radius: 100%;
+          box-shadow: $box-shadow;
+          cursor: pointer;
+          height: px2rem(40);
+          width: px2rem(40);
+          position:relative;
+          z-index: 2;
+          &[aria-expanded="true"] + .dropdown-content {
+            height: auto;
+            opacity: 1;
+            transform: scaleY(1);
+            transition: transform .3s ease;
+            z-index: 1;
+            .share-links {
+              display: flex;
+              pointer-events: all;
+            }
+          }
+        }
+      }
+    }
+    hgroup time {
+      @extend .meta
+    }
+    .media {
+      aspect-ratio: 16/9;
+      border-radius: $border-radius;
+      margin-bottom: $spacing5;
+      margin-top: $spacing5;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .article-body {
+    word-break: break-word;
+  }
+}
+
+.longformat.article {
+    @include grid(12, md);
+    .favorite {
+      .f-favorite,
+      .f-favorite-o {
+        background-color: $body-background-color;
+      }
+    }
+    .categories .time {
+        background-color: $body-background-color;
+        color: $body-color;
+        padding: $spacing0 $spacing1;
+        border-radius: 50px;
+    }
+    .media {
+        border-radius: $border-radius;
+        overflow: hidden;
+        img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+    .heading {
+        hgroup span {
+            margin-bottom: $spacing1;
+        }
+    }
+    .categories {
+        align-items: center;
+        display: flex;
+        gap: $spacing1;
+        .mood {
+            @include mood(white)
+        }
+        .category {
+            @include category;
+        }
+        .mood {
+            border: 1px solid $border-color;
+        }
+    }
+    @include media-breakpoint-up(md) {
+        .heading hgroup {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+        .article-content {
+            grid-column: 1 / 7;
+            .time {
+                position: absolute;
+                top: $spacing3;
+                right: $spacing3;
+            }
+        }
+        .media {
+            grid-column: 7 / 13;
+            aspect-ratio: 16/9;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        .heading hgroup,
+        .lead,
+        .categories {
+            z-index: 3;
+        }
+        .heading hgroup,
+        .heading hgroup a,
+        .categories,
+        .lead {
+            color: $body-background-color;
+        }
+        .lead {
+            position: relative;
+        }
+        .heading,
+        .heading hgroup {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: $spacing1;
+            h3 a {
+                @include stretched-link;
+            }
+        }
+        .categories {
+            gap: $spacing0;
+            .mood {
+                border: 1px solid $body-background-color;
+            }
+            .time {
+                margin-left: auto;
+            }
+        }
+        .media {
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            &::before {
+                content: '';
+                background-color: $body-color;
+                opacity: .3;
+                bottom: 0;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

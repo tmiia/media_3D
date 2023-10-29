@@ -1,0 +1,151 @@
+@function px2rem($size) {
+    $remSize: calc($size / 16);
+    @return #{$remSize}rem;
+}
+
+@function half($size) {
+    @return calc(#{$size} / 2);
+}
+
+@function col($quantity, $base: 12) {
+    $quantity-on-base: $quantity / $base * 12;
+    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} );
+    @return #{$width};
+}
+
+
+@mixin stretched-link($pseudo-element: after) {
+    &::#{$pseudo-element} {
+        bottom: 0;
+        content: '';
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 999;
+    }
+}
+
+@mixin reset-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+}
+
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter, $gap-x: $grid-gutter) {
+    word-break: break-word;
+    @if $breakpoint {
+        @include media-breakpoint-up($breakpoint) {
+            display: grid;
+            grid-gap: $gap-y $gap-x;
+            grid-template-columns: repeat($cols, 1fr);
+        }
+    }
+    @else {
+        display: grid;
+        grid-gap: $gap-y $gap-x;
+        grid-template-columns: repeat($cols, 1fr);
+    }
+    @include media-breakpoint-down(lg) {
+        grid-gap: $grid-gutter-sm;
+    }
+}
+
+@mixin cta($bg: $color-accent, $color: white) {
+    border: none;
+    background-color: $bg;
+    border-radius: 20px;
+    color: $color;
+    cursor: pointer;
+    padding: $spacing1 $spacing4;
+}
+@mixin category {
+    padding: $spacing0 $spacing1;
+    border-radius: 50px;
+    &-2 {
+        background-color: $culture;
+        &, a {
+            color: $culture-color;
+        }
+    }
+    &-1 {
+        background-color: $ecology;
+        &, a {
+            color: $ecology-color;
+        }
+    }
+    &-7 {
+        background-color: $economy;
+        &, a {
+            color: $economy-color;
+        }
+    }
+    &-3 {
+        background-color: $politic;
+        &, a {
+            color: $politic-color;
+        }
+    }
+    &-4 {
+        background-color: $sport;
+        &, a {
+            color: $sport-color;
+        }
+    }
+    &-6 {
+        background-color: $society;
+        &, a {
+            color: $society-color;
+        }
+    }
+    &-5 {
+        background-color: $science;
+        &, a {
+            color: $science-color;
+        }
+    }
+}
+@mixin mood($color: #777) {
+  border-radius: 50px;
+  padding: half($spacing0) $spacing1;
+  border: 1px solid $color;
+  color: $color;
+  &::before {
+    display: inline-block;
+    font-size: $tags-font-size;
+  }
+  &--2::before {
+    content: 'incroyable 😆'
+  }
+  &--1::before {
+    content: 'sympa 😃';
+  }
+  &-0::before {
+    content: 'okay 🙂';
+  }
+  &-1::before {
+    content: 'pas cool 🥲';
+  }
+  &-2::before {
+    content: 'tendu 😔';
+  }
+}
+
+@mixin getIcons($url, $color, $size : 24px){
+  background-color: $color;
+  display: inline-block;
+  width: $size;
+  height: $size;
+  background-size: $size;
+  mask-repeat: no-repeat;
+  mask-image: url($url);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-image: url($url);
+  -webkit-mask-size: contain;
+}
+
+@mixin changeIconSize($size){
+  width: $size;
+  height: $size;
+  background-size: $size;
+}

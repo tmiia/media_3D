@@ -1,0 +1,65 @@
+<%= form_with(model: article) do |form| %>
+  <% if article.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% article.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :lead, style: "display: block" %>
+    <%= form.text_area :lead %>
+  </div>
+
+  <div>
+    <%= form.label :thumbnail, style: "display: block" %>
+    <%= form.text_field :thumbnail %>
+  </div>
+
+  <div>
+    <%= form.label :text_content, style: "display: block" %>
+    <%= form.text_area :text_content, class: "tinymce" %>
+  </div>
+
+  <div>
+    <%= form.label :media, style: "display: block" %>
+    <%= form.text_field :media %>
+  </div>
+
+  <div>
+    <%= form.label :mood_value, style: "display: block" %>
+    <%= form.number_field :mood_value %>
+  </div>
+
+  <div>
+    <%= form.label :keywords, style: "display: block" %>
+    <%= form.text_area :keywords %>
+  </div>
+
+  <div>
+    <%= form.label :is_longformat, style: "display: block", permitted: false %>
+    <%= form.check_box :is_longformat %>
+  </div>
+
+  <div>
+    <%= form.label :is_draft, style: "display: block", permitted: false %>
+    <%= form.check_box :is_draft %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= tinymce_assets %>
+<script type="text/javascript" src="/assets/tinymce.js">

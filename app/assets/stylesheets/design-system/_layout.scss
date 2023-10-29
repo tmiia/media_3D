@@ -1,0 +1,106 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box
+}
+
+body {
+    background: $body-background-color;
+    color: $body-color;
+    font-family: $body-font-family;
+    padding-bottom: px2rem(80);
+    padding-top: px2rem(90);
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            transition-duration: 0s !important;
+        }
+    }
+    &.has-menu-opened {
+      overflow: hidden;
+    }
+}
+
+.container {
+    max-width: $grid-max-width;
+    padding-left: half($grid-gutter-sm);
+    padding-right: half($grid-gutter-sm);
+    @include media-breakpoint-up(md) {
+        padding-left: $grid-gutter-sm;
+        padding-right: $grid-gutter-sm;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+ul, ol {
+    padding-left: 0;
+    list-style: none;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    > li > p {
+        display: inline;
+    }
+}
+
+section + section {
+    margin-top: $spacing5;
+    @include media-breakpoint-up(md) {
+        margin-top: $spacing6;
+    }
+}
+.devise {
+  input{
+      width: 100%;
+      padding: $spacing3;
+      border: none;
+
+  }
+
+  input[type="submit"]{
+      border-radius: $border-radius;
+      background-color: $body-color;
+      color: $color-alt;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover{
+          background-color: $color-text-alt;
+          transition: background-color 0.05s ease-in-out ;
+      }
+
+  }
+}
+.block-inline{
+    display: ruby;
+    margin: auto;
+}
+
+
+.field{
+    position: relative;
+    input{
+        border-radius: $border-radius;
+        border: 2px solid $border-color;
+        ::placeholder{
+            color: $color-text-alt;
+        }
+        &:focus{
+            border-color: $border-color;
+        }
+    }
+    label{
+        margin-left: 30px;
+        padding: 6px 8px;
+        background-color: $body-background-color;
+        position: absolute;
+        top: 4px;
+    }
+}
+
+input[type="checkbox"]{
+    max-width: fit-content;
+}

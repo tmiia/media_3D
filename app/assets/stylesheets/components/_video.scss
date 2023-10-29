@@ -1,0 +1,10 @@
+.video {
+  aspect-ratio: 16/9;
+  margin-bottom: $spacing5;
+  iframe {
+    border: none;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+}

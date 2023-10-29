@@ -1,0 +1,150 @@
+<main class="article__page">
+  <p style="color: green"><%= notice %></p>
+  <header class="hero">
+    <div class="container">
+      <hgroup>
+        <h1><%= @article.title %></h1>
+        <time datetime="<%= @article.created_at %>"><%= @article.created_at.strftime("%d %B, %Y à %H:%M") %></time>
+      </hgroup>
+      <div class="actions">
+        <div class="categories">
+          <span class="category category-<%= @article.category_id %>"><%= link_to category_name_from_id(@article.category_id), category_url_from_id(@article.category_id) %></span>
+          <span class="mood mood-<%= @article.mood_value %>" title="Article de niveau <%= @article.mood_value %> sur 10"></span>
+        </div>
+        <% if current_user %>
+          <% if current_user.favorite_articles.exists?(@article.id) %>
+            <%= form_with model: @article, local: true, url: remove_from_favorites_article_path(@article), method: :delete do |form| %>
+              <span class="f-favorite"></span>
+              <%= form.submit "", aria: { label: "Retirer des favoris" }, class: 'btn__dislike' %>
+            <% end %>
+          <% else %>
+            <%= form_with model: @article, local: true, url: add_to_favorites_article_path(@article), method: :post do |form| %>
+              <span class="f-favorite-o"></span>
+              <%= form.submit "", aria: { label: "Ajouter au favoris" }, class: 'btn__like' %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <div class="dropdown-share">
+          <button aria-expanded="false">
+            <span class="f-share"></span>
+          </button>
+          <div class="dropdown-content">
+            <ul class="share-links">
+              <li>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>" target="_blank" rel="noopener" title="<%= @article.title %>">
+                  <span>Facebook</span>
+                  <img src="https://www.zupimages.net/up/23/43/2407.png">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=<%= request.original_url %>" target="_blank" rel="noopener" title="<%= @article.title %>">
+                  <span>Linkedin</span>
+                  <img src="https://www.zupimages.net/up/23/43/thc9.png">
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/intent/tweet?text=<%= @article.title %> <%= request.original_url %>" target="_blank" rel="noopener" title="<%= @article.title %>">
+                  <span>Twitter</span>
+                  <img src="https://www.zupimages.net/up/23/43/cmpm.png">
+                </a>
+              </li>
+            <ul>
+          </div>
+        </div>
+      </div>
+      <div class="media">
+        <img src="<%= @article.thumbnail %>" alt="">
+      </div>
+      <div class="lead"><%= @article.lead %></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="article-media">
+        <% if @article.media %>
+          <div class="video">
+            <iframe width="560" height="315" src="<%= @article.media %>" fraconsmeborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        <% end %>
+      </div>
+      <div class="article-body">
+        <%= @article.text_content %>
+      </div>
+    </div>
+  </section>
+
+  <% if @related_articles.any? %>
+    <section>
+      <div class="container">
+        <h2>Plus d’actus sur la politique</h2>
+        <div class="articles">
+          <div class="article-list">
+            <% @related_articles.each do |article| %>
+              <%= render article %>
+              <p>
+                <%= link_to "Show this article", article %>
+              </p>
+            <% end %>
+          </div>
+          <div class="more">Voir plus sur la catégorie politique</div>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <% if @recommended_articles.any? %>
+    <section>
+      <div class="container">
+        <h2>La dose d’actus du jour</h2>
+        <div class="articles">
+          <div class="article-list">
+            <% @recommended_articles.first(5).each do |article| %>
+              <%= render article %>
+              <p>
+                <%= link_to "Show this article", article %>
+              </p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <section>
+    <div class="container">
+      <h2>Commentaires</h2>
+      <div class="comments-list">
+        <% @comments.each do |comment| %>
+          <div class="comment">
+            <div class="comment-heading">
+              <div class="avatar">
+                <a class="user" href="<%= user_path(comment.user) %>">
+                  <img src="<%= comment.user.avatar %>">
+                </a>
+              </div>
+              <span class="name"><b><%= comment.user.pseudonym %></b></span><br>
+            </div>
+            <div class="comment-content">
+              <p><%= comment.body %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="comment-new">
+        <% if user_signed_in? %>
+          <%= form_for([@article, @article.comments.build]) do |f| %>
+            <div class="field">
+              <%= f.text_area :body, placeholder: "Écrire un message..." %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Envoyer" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>Connectez-vous pour poster un commentaire.</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>

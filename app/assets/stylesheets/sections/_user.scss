@@ -1,0 +1,30 @@
+.user__profile {
+  .hero {
+    margin-bottom: $spacing5;
+    .container {
+      display: flex;
+      gap: $spacing2;
+      .btn-logout {
+        @include reset-btn;
+      }
+    }
+    .avatar {
+      height: 70px;
+      width: 70px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 100%;
+      }
+    }
+  }
+  .heading {
+    flex: 1;
+    button {
+      @include cta;
+      font-size: $tags-font-size;
+      padding: $spacing0 $spacing1;
+    }
+  }
+}

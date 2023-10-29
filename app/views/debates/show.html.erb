@@ -1,0 +1,90 @@
+
+<main class="debate__page">
+  <header class="hero">
+    <div class="container">
+      <hgroup>
+        <h1><%= @debate.title %></h1>
+        <span class="meta">Le débat du jour</span>
+      </hgroup>
+      <div class="actions">
+        <div class="categories">
+          <span class="category category-<%= @debate.category_id %>"><%= link_to category_name_from_id(@debate.category_id), category_url_from_id(@debate.category_id) %></span>
+          <span class="mood mood-<%= @debate.mood_value %>" title="Article de niveau <%= @debate.mood_value %> sur 10"></span>
+        </div>
+        <span class="coutdown">clos dans <strong>12h</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <section class="poll-logout">
+    <div class="container">
+      <hgroup>
+        <h2>👋 P’tit tips !</h2>
+        <p>Connecte-toi pour participer au chat et au sondage !</p>
+      </hgroup>
+      <div class="actions">
+        <a href="#">S'inscrire</a>
+        <a href="#">Se connecter</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="debate-poll">
+    <div class="container">
+      <hgroup>
+        <h2>Qu’en penses-tu ?</h2>
+        <span>13 votes</span>
+      </hgroup>
+      <div class="actions">
+        <button>Oui</button>
+        <button>Non</button>
+        <button>Pas d'avis</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="debate-explanation">
+    <div class="container">
+      <h2>On t’explique</h2>
+      <a href="#">Le bric à brac des BRICS en 360</a>
+    </div>
+  </section>
+
+  <section class="debate-content">
+    <div class="container">
+      <h2>L’heure du débat a sonné</h2>
+      <div class="comments-list">
+      <% @debate.debate_responses.each do |response| %>
+        <div class="comment">
+          <div class="comment-heading">
+            <div>
+              <span class="name"><b><%= response.user.pseudonym %></b></span><br>
+            </div>
+          </div>
+          <div class="comment-content">
+            <p><%= response.content %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+      <div class="comment-new">
+        <% if user_signed_in? %>
+          <%= form_for([@debate, @debate.debate_responses.build]) do |f| %>
+            <div class="field">
+              <%= f.text_area :content, placeholder: "Ajoute une réponse..." %>
+            </div>
+            <div class="actions">
+              <%= f.submit "Poster une réponse" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>Connectez-vous pour poster un commentaire.</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+<h2>Nouvelle réponse</h2>
