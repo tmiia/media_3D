@@ -5,12 +5,8 @@ Rails.application.routes.draw do
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  resources :articles
   resources :articles do
     resources :comments, only: [:new, :create]
-  end
-
-  resources :articles do
     member do
       post 'add_to_favorites'
       delete 'remove_from_favorites'
@@ -23,9 +19,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :debates
   resources :debates do
-    resources :debate_responses, 
+    resources :debate_responses
   end
 
   match '/users/:id',     to: 'users#show',       via: 'get'
