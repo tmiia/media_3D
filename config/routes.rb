@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :debates
   resources :debates do
-    resources :debate_responses, only: [:create, :edit, :update, :destroy]
+    resources :debate_responses, 
   end
 
   match '/users/:id',     to: 'users#show',       via: 'get'
