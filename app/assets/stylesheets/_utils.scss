@@ -1,4 +1,4 @@
-@function px2rem($size) {
+@function px2rem($size : 1) {
     $remSize: calc($size / 16);
     @return #{$remSize}rem;
 }
