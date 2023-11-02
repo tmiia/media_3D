@@ -1,12 +1,3 @@
-@function px2rem($size : 1) {
-    $remSize: calc($size / 16);
-    @return #{$remSize}rem;
-}
-
-@function half($size) {
-    @return calc(#{$size} / 2);
-}
-
 @function col($quantity, $base: 12) {
     $quantity-on-base: $quantity / $base * 12;
     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} );
