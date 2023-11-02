@@ -22,8 +22,8 @@ body {
 
 .container {
     max-width: $grid-max-width;
-    padding-left: half($grid-gutter-sm);
-    padding-right: half($grid-gutter-sm);
+    padding-left: $grid-gutter-sm;
+    padding-right: $grid-gutter-sm;
     @include media-breakpoint-up(md) {
         padding-left: $grid-gutter-sm;
         padding-right: $grid-gutter-sm;
