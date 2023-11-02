@@ -1,8 +1,3 @@
-// @function col($quantity, $base: 12) {
-//     $quantity-on-base: $quantity / $base * 12;
-//     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} );
-//     @return #{$width};
-// }
 
 
 @mixin stretched-link($pseudo-element: after) {
